@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1e3a8a">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<title>Genius Coaching Center (Sevtar)</title>
+<style>
+  :root {
+    --primary: #1d4ed8;
+    --primary-dark: #1e3a8a;
+    --accent: #f59e0b;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #0f172a;
+    --muted: #64748b;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  nav {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .logo { font-weight: 700; font-size: 1.2rem; }
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 16px;
+    font-size: 0.95rem;
+  }
+  nav a:hover { text-decoration: underline; }
+
+  .hero {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px 90px;
+  }
+  .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+  .hero p { font-size: 1.1rem; opacity: 0.95; max-width: 640px; margin: auto; }
+  .btn {
+    display: inline-block;
+    margin-top: 24px;
+    background: var(--accent);
+    color: #1f2937;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  section { max-width: 1100px; margin: auto; padding: 60px 20px; }
+  section h2 {
+    text-align: center;
+    font-size: 1.9rem;
+    margin-bottom: 8px;
+    color: var(--primary-dark);
+  }
+  .sub {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 26px 22px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    border-top: 5px solid var(--primary);
+  }
+  .card h3 { margin-bottom: 8px; font-size: 1.2rem; }
+  .card ul { padding-left: 18px; color: var(--muted); }
+  .tag {
+    display: inline-block;
+    background: #e0e7ff;
+    color: var(--primary-dark);
+    font-size: 0.8rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+
+  .notes-list { list-style: none; }
+  .notes-list li {
+    background: var(--card);
+    margin-bottom: 12px;
+    padding: 14px 18px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+  }
+  .notes-list a {
+    background: var(--primary);
+    color: #fff;
+    padding: 7px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+
+  .doubt-box {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+    padding: 24px;
+    max-width: 700px;
+    margin: auto;
+  }
+  .chat-area {
+    background: #f1f5f9;
+    border-radius: 10px;
+    height: 260px;
+    overflow-y: auto;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+  .msg {
+    padding: 10px 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    max-width: 85%;
+    font-size: 0.95rem;
+  }
+  .bot { background: #dbeafe; }
+  .user { background: #dcfce7; margin-left: auto; }
+  .input-row { display: flex; gap: 10px; }
+  .input-row input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font-size: 1rem;
+  }
+  .input-row button {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+
+  .contact {
+    background: var(--primary-dark);
+    color: #fff;
+    text-align: center;
+  }
+  .contact h2 { color: #fff; }
+  .contact .sub { color: #cbd5e1; }
+  .contact p { margin: 6px 0; }
+
+  footer {
+    background: #0f172a;
+    color: #94a3b8;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Genius Coaching Center (Sevtar)</div>
+    <div>
+      <a href="#classes">Classes</a>
+      <a href="#notes">Notes/PDF</a>
+      <a href="#doubt">Doubt Robot</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<div style="text-align:center;padding:16px 16px 0;background:#0b1220;">
+  <img src="poster.png" alt="Genius Coaching Center Sevtar poster" style="max-width:520px;width:100%;border-radius:14px;display:block;margin:auto;">
+</div>
+
+<div class="hero">
+  <h1>Genius Coaching Center, Sevtar</h1>
+  <p>Class 9, 10, 11 aur 12 (Science aur Arts) ki taiyari. Saaf padhai, notes aur sawalon ke liye madad.</p>
+  <a class="btn" href="#contact">Admission Puchhein</a>
+</div>
+
+<section id="classes">
+  <h2>Hamare Classes</h2>
+  <p class="sub">Har class ke liye alag batch aur dhyan</p>
+  <div class="grid">
+    <div class="card">
+      <span class="tag">Class 9</span>
+      <h3>Foundation</h3>
+      <ul>
+        <li>Maths</li>
+        <li>Science</li>
+        <li>English aur Hindi</li>
+        <li>Social Science</li>
+      </ul>
+      <details style="margin-top:12px;">
+        <summary style="cursor:pointer;color:#1d4ed8;font-weight:700;">Maths ke chapter dekhein</summary>
+        <ul style="list-style:none;padding-left:0;margin-top:8px;">
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch01.pdf">1. Number Systems</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch02.pdf">2. Polynomials</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch03.pdf">3. Coordinate Geometry</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch04.pdf">4. Linear Equations in Two Variables</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch05.pdf">5. Introduction to Euclid's Geometry</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch06.pdf">6. Lines and Angles</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch07.pdf">7. Triangles</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch08.pdf">8. Quadrilaterals</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch09.pdf">9. Areas of Parallelograms and Triangles</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch10.pdf">10. Circles</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch11.pdf">11. Constructions</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch12.pdf">12. Heron's Formula</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch13.pdf">13. Surface Areas and Volumes</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch14.pdf">14. Statistics</a></li>
+          <li style="margin-bottom:6px;"><a href="notes/class9-maths-ch15.pdf">15. Probability</a></li>
+        </ul>
+      </details>
+    </div>
+    <div class="card">
+      <span class="tag">Class 10</span>
+      <h3>Board Preparation</h3>
+      <ul>
+        <li>Maths</li>
+        <li>Science</li>
+        <li>Social Science</li>
+        <li>Mock tests</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Class 11 Science</span>
+      <h3>PCM / PCB</h3>
+      <ul>
+        <li>Physics</li>
+        <li>Chemistry</li>
+        <li>Maths ya Biology</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Class 11 Arts</span>
+      <h3>Arts Stream</h3>
+      <ul>
+        <li>History</li>
+        <li>Political Science</li>
+        <li>Economics</li>
+        <li>English</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Class 12 Science</span>
+      <h3>Board aur Entrance</h3>
+      <ul>
+        <li>Physics, Chemistry</li>
+        <li>Maths ya Biology</li>
+        <li>Weekly tests</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Class 12 Arts</span>
+      <h3>Board Preparation</h3>
+      <ul>
+        <li>History, Political Science</li>
+        <li>Economics</li>
+        <li>English</li>
+        <li>Answer writing practice</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="notes">
+  <h2>Notes aur PDF</h2>
+  <p class="sub">Class ke hisaab se notes download karein</p>
+  <ul class="notes-list">
+    <li><span>Class 9 - Maths - Chapter 1</span><a href="#">Download</a></li>
+    <li><span>Class 10 - Science - Chapter 1</span><a href="#">Download</a></li>
+    <li><span>Class 11 Physics - Units aur Measurement</span><a href="#">Download</a></li>
+    <li><span>Class 12 Chemistry - Solutions</span><a href="#">Download</a></li>
+    <li><span>Class 12 History - Chapter 1</span><a href="#">Download</a></li>
+  </ul>
+</section>
+
+<section id="practice">
+  <h2>Practice Questions</h2>
+  <p class="sub">Har chapter ke baad khud se practice karein. Solutions sir check karenge.</p>
+  <div class="grid">
+    <div class="card">
+      <span class="tag">Class 10 Maths</span>
+      <h3>Chapter 1: Real Numbers</h3>
+      <ul>
+        <li>10 MCQ aur 5 short answer</li>
+        <li>Solutions: [link jodein]</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Class 12 Physics</span>
+      <h3>Chapter 1: Electric Charges</h3>
+      <ul>
+        <li>15 numerical questions</li>
+        <li>Solutions: [link jodein]</li>
+      </ul>
+    </div>
+    <div class="card">
+      <span class="tag">Class 12 History</span>
+      <h3>Chapter 1: Bricks and Beads</h3>
+      <ul>
+        <li>Long aur short answer practice</li>
+        <li>Solutions: [link jodein]</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="doubt">
+  <h2>Doubt Robot</h2>
+  <p class="sub">Apna sawal likhein, robot madad karega. Teacher ki salaah zaroor lein.</p>
+  <div class="doubt-box">
+    <div class="rules" style="background:#fef3c7;border-radius:10px;padding:12px 14px;margin-bottom:14px;font-size:0.9rem;">
+      <strong>Niyam:</strong>
+      <ul style="padding-left:18px;margin-top:6px;">
+        <li>Robot poora jawab nahi, balki step-by-step samjhayega.</li>
+        <li>Apna naam, phone, school ya address na likhein.</li>
+        <li>Har jawab ke baad sir/teacher se confirm karein.</li>
+      </ul>
+    </div>
+    <div class="chat-area" id="chat">
+      <div class="msg bot">Namaste! Apna padhai ka sawal likhein.</div>
+    </div>
+    <div class="input-row">
+      <input type="text" id="question" placeholder="Apna sawal yahan likhein...">
+      <button onclick="askRobot()">Puchhein</button>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Sampark Karein</h2>
+  <p class="sub">Admission aur jaankari ke liye</p>
+  <p><strong>Pata:</strong> SBI Bank ke bagal mein, Sevtar</p>
+  <p><strong>Phone / WhatsApp:</strong> +91 99054 27506</p>
+  <p><strong>Batch Timing (subah):</strong></p>
+  <p>Class 9: 7:00 AM - 8:00 AM</p>
+  <p>Class 10: 6:00 AM - 7:00 AM</p>
+  <p>Class 11: 8:00 AM - 9:00 AM</p>
+  <p>Class 12 Arts: 9:00 AM - 10:00 AM</p>
+  <p>Class 12 Science: 10:00 AM - 12:00 PM</p>
+</section>
+
+<footer>
+  &copy; 2026 Genius Coaching Center, Sevtar. Sabhi adhikar surakshit.
+</footer>
+
+<script>
+  // Abhi yeh demo jawab deta hai. Baad mein yahan API jodi jaayegi.
+  function askRobot() {
+    const input = document.getElementById("question");
+    const chat = document.getElementById("chat");
+    const text = input.value.trim();
+    if (!text) return;
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "msg user";
+    userMsg.textContent = text;
+    chat.appendChild(userMsg);
+
+    const botMsg = document.createElement("div");
+    botMsg.className = "msg bot";
+    botMsg.textContent = "Yeh sawal achha hai! Abhi robot demo mode mein hai. Jald hi asli jawab milega. Tab tak apne teacher se poochhein.";
+    chat.appendChild(botMsg);
+
+    input.value = "";
+    chat.scrollTop = chat.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
